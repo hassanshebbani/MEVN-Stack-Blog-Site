@@ -17,10 +17,6 @@ module.exports = class API {
     try {
       const postID = req.params.id;
       const foundPost = await Post.findById(postID);
-      console.log(
-        "🚀 ~ file: api.js ~ line 18 ~ API ~ fetchPostByID ~ foundPost",
-        foundPost
-      );
       if (!foundPost) {
         return res
           .status(404)
@@ -55,6 +51,7 @@ module.exports = class API {
         fs.unlinkSync(`./public/uploads/${foundPost.image}`);
       } catch (e) {
         console.log(e);
+        res.status(404).json({ err: e });
       }
     }
     const newPost = req.body;
@@ -70,6 +67,19 @@ module.exports = class API {
   }
   // delete post
   static async deletePost(req, res) {
-    res.send("Delete Post");
+    const postID = req.params.id;
+    const foundPost = await Post.findById(postID);
+    if (foundPost) {
+      try {
+        fs.unlinkSync(`./public/uploads/${foundPost.image}`);
+        await Post.findByIdAndDelete(postID);
+        return res
+          .status(200)
+          .json({ message: `Post of id ${postID} deleted successfully!` });
+      } catch (e) {
+        res.status(404).json({ message: e });
+      }
+    }
+    res.status(404).json({ message: `No Post of id ${postID} found!` });
   }
 };
