@@ -12,12 +12,22 @@ module.exports = class API {
     }
     // fetch post by ID
     static async fetchPostByID(req, res) {
-        res.send("Fetching post by id")
+        try {
+            const postID = req.params.id;
+            const foundPost = await Post.findById(postID)
+            console.log("🚀 ~ file: api.js ~ line 18 ~ API ~ fetchPostByID ~ foundPost", foundPost)
+            if (!foundPost) {
+                return res.status(404).json({message: `no post of id ${postID} found!`})
+            }
+            res.status(200).json(foundPost)
+        } catch (e) {
+            res.status(404).json({err: e})
+        }
     }
     // create post
     static async createPost(req, res) {
         const newPost = req.body;
-        const imageName = req.file.fileName;
+        const imageName = req.file.filename;
         newPost.image = imageName;
         try {
             await Post.create(newPost);
