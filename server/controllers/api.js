@@ -23,6 +23,7 @@ module.exports = class API {
             await Post.create(newPost);
             res.status(201).json({message: "New Post created successfully!"})
         } catch(e) {
+            console.log(e)
             res.status(400).json({err: e})
         }
     }
