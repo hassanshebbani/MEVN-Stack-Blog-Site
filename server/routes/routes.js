@@ -14,7 +14,7 @@ router.get("/:id", API.fetchPostByID)
 router.post("/", upload, API.createPost)
 
 // Update post route
-router.patch("/:id", API.updatePost)
+router.patch("/:id", upload, API.updatePost)
 
 // Delete post route
 router.delete("/:id", API.deletePost)
