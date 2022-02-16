@@ -68,11 +68,10 @@ module.exports = class API {
   // delete post
   static async deletePost(req, res) {
     const postID = req.params.id;
-    const foundPost = await Post.findById(postID);
+    const foundPost = await Post.findByIdAndDelete(postID);
     if (foundPost) {
       try {
         fs.unlinkSync(`./public/uploads/${foundPost.image}`);
-        await Post.findByIdAndDelete(postID);
         return res
           .status(200)
           .json({ message: `Post of id ${postID} deleted successfully!` });
