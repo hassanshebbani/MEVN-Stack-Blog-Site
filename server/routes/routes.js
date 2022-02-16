@@ -1,4 +1,5 @@
 const express = require("express")
+const upload = require("../middleware/multer")
 const API = require("../controllers/api")
 
 const router = express.Router();
@@ -10,7 +11,7 @@ router.get("/", API.fetchAllPosts)
 router.get("/:id", API.fetchPostByID)
 
 // Create post route
-router.post("/", API.createPost)
+router.post("/", upload, API.createPost)
 
 // Update post route
 router.patch("/:id", API.updatePost)
