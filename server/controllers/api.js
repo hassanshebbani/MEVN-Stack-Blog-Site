@@ -47,16 +47,15 @@ module.exports = class API {
   // update post
   static async updatePost(req, res) {
     const postID = req.params.id;
-    let newImage = "";
+    const foundPost = await Post.findById(postID);
+    let newImage = foundPost.image;
     if (req.file) {
       newImage = req.file.filename;
       try {
-        fs.unlinkSync(`./public/uploads/${req.body.old_image}`);
+        fs.unlinkSync(`./public/uploads/${foundPost.image}`);
       } catch (e) {
         console.log(e);
       }
-    } else {
-      newImage = req.body.old_image;
     }
     const newPost = req.body;
     newPost.image = newImage;
