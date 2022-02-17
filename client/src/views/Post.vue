@@ -18,7 +18,7 @@
                   :to="{ name: 'edit-post', params: { id: post._id } }"
                   >Edit Post</v-btn
                 >
-                <v-btn color="red" text>Delete</v-btn>
+                <v-btn color="red" text @click="deletePost">Delete</v-btn>
               </v-col>
             </v-row>
           </v-card-actions>
@@ -46,6 +46,12 @@ export default {
   },
   async created() {
     this.post = await API.fetchPostByID(this.$route.params.id);
+  },
+  methods: {
+    async deletePost() {
+      const res = await API.deletePost(this.$route.params.id);
+      this.$router.push({ name: "home", params: { message: res.message } });
+    },
   },
 };
 </script>
