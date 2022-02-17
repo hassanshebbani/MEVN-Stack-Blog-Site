@@ -20,6 +20,7 @@ npm install
 npm run dev
 ```
 ### ***Don't forget to replace my environmental variables with yours :D***
+---
 
 ## Client Installation
 Navigate into the server directory and run the below commands:
