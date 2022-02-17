@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import API from '../utils/api';
+import API from "../utils/api";
 export default {
   data() {
     return {
@@ -70,9 +70,9 @@ export default {
       formData.append("category", this.post.category);
       formData.append("content", this.post.content);
       formData.append("image", this.image);
-      if(this.$refs.form.validate()) {
-          const res = await API.createPost(formData);
-          this.$router.push({name: "home", params: {message: res.message}})
+      if (this.$refs.form.validate()) {
+        const res = await API.createPost(formData);
+        this.$router.push({ name: "home", params: { message: res.message } });
       }
     },
   },
