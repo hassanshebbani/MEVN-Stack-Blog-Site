@@ -1,4 +1,4 @@
-# MEVN STACK BLOG POSTS DEMO
+# MEVN Stack Blog Site Demo
 A demo of a Full Stack blog site with CRUD operations using the MEVN stack.
 
 > Frontend: Vue Js
@@ -16,4 +16,3 @@ npm install
 ```
 npm run dev
 ```
-
