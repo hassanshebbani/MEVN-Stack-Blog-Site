@@ -19,12 +19,12 @@ export default class API {
         return response.data;
     }
     // Update the specific post with the provided ID
-    static async createPost(postID, updatedPost) {
+    static async updatePost(postID, updatedPost) {
         const response = await axios.patch(`${serverURL}/${postID}`, updatedPost);
         return response.data;
     }
     // Delete the specific post with the provided ID
-    static async createPost(postID) {
+    static async deletePost(postID) {
         const response = await axios.delete(`${serverURL}/${postID}`);
         return response.data;
     }
